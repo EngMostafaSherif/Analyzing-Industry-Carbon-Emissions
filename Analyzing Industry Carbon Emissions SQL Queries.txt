@@ -1,0 +1,57 @@
+--FIRST SOLUTION (COMPATIBLE WITH BOTH PostgreSQL AND T-SQL)
+
+SELECT
+    industry_group,
+    COUNT(DISTINCT company) AS num_companies,
+    ROUND(SUM(carbon_footprint_pcf), 1) AS total_industry_footprint
+FROM
+    product_emissions
+WHERE
+    year = (SELECT MAX(year) FROM product_emissions)
+GROUP BY
+    industry_group
+ORDER BY
+    total_industry_footprint DESC;
+	
+----------------------------------------
+	
+--SECOND SOLUTION (PostgreSQL)
+
+WITH latest_year AS (
+    SELECT MAX(year) AS max_year
+    FROM product_emissions
+)
+SELECT
+    industry_group,
+    COUNT(DISTINCT company) AS num_companies,
+    ROUND(SUM(carbon_footprint_pcf)::numeric, 1) AS total_industry_footprint
+FROM
+    product_emissions
+WHERE
+    year = (SELECT max_year FROM latest_year)
+GROUP BY
+    industry_group
+ORDER BY
+    total_industry_footprint DESC;
+
+----------------------------------------
+
+--THIRD SOLUTION (T-SQL)
+
+WITH latest_year AS (
+    SELECT MAX(year) AS max_year
+    FROM product_emissions
+)
+SELECT
+    industry_group,
+    COUNT(DISTINCT company) AS num_companies,
+    ROUND(CAST(SUM(carbon_footprint_pcf) AS numeric), 1) AS total_industry_footprint
+FROM
+    product_emissions
+WHERE
+    year = (SELECT max_year FROM latest_year)
+GROUP BY
+    industry_group
+ORDER BY
+    total_industry_footprint DESC;
+
