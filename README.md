@@ -1,5 +1,5 @@
 # Analyzing Industry Carbon Emissions
-An small SQL query for a [DataCamp project](https://projects.datacamp.com/projects/1590) analysing industry carbon emissions from a [nature article](https://www.nature.com/articles/s41597-022-01178-9) using PostgreSQL and T-SQL as well as vibe coding to achieve the needed result
+A small SQL query for a [DataCamp project](https://projects.datacamp.com/projects/1590) analysing industry carbon emissions from a [nature article](https://www.nature.com/articles/s41597-022-01178-9) using PostgreSQL and T-SQL as well as vibe coding to achieve the needed result
 
 > This data is stored in a PostgreSQL database containing one table, product_emissions, which looks at PCFs by product as well as the stage of production that these emissions occurred. ~DataCamp
 
